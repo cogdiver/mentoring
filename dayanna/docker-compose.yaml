@@ -1,14 +1,43 @@
 services:
-  tester:
-    # image: python:alpine3.20
-    container_name: python_pruebas
-    build: .
-    command: tail -f /dev/null
-    # ports:
-    #   - 8081:8080
+  # tester:
+  #   # image: python:alpine3.20
+  #   container_name: python_pruebas
+  #   build: .
+  #   command: tail -f /dev/null
+  #   # ports:
+  #   #   - 8081:8080
+  #   environment:
+  #     - VARIABLE3=texto3
+  #   env_file:
+  #     - .env
+  #   # volumes:
+  #   #   - .:/app
+
+  nifi:
+    image: apache/nifi:1.19.1
+    deploy:
+      replicas: 1
+    ports:
+      - "8080:8080"
+      - "8181:8181"
+      - "8443:8443"
+      - "10000:10000"
     environment:
-      - VARIABLE3=texto3
-    env_file:
-      - .env
-    # volumes:
-    #   - .:/app
+      - NIFI_WEB_PROXY_HOST=0.0.0.0:8443
+    volumes:
+      - conf:/opt/nifi/current/conf
+      - content:/opt/nifi/current/content_repository
+      - db:/opt/nifi/current/database_repository
+      - flowfile:/opt/nifi/current/flowfile_repository
+      - provenance:/opt/nifi/current/provenance_repository
+      - logs:/opt/nifi/current/logs
+      - data:/opt/nifi/current/data
+      # - /opt/certs/localhost:/opt/certs
+volumes:
+  conf:
+  content:
+  db:
+  flowfile:
+  provenance:
+  logs:
+  data:
