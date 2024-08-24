@@ -1,3 +1,8 @@
 services:
-  test:
-    ...
+  python-test:
+    container_name: python-test
+    build: .
+    command: tail -f /dev/null
+    volumes:
+      - .:/app
+      - /etc/localtime:/etc/localtime:ro
