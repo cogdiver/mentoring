@@ -4,4 +4,3 @@ operaciones matematicas
 condicionales
 ciclos
 listas y tuplas
-
