@@ -1,0 +1,40 @@
+x-services-common:
+  volumes:
+    - ./app:/app
+    - ./conn/gcp:/conn/gcp
+  environment:
+    - GOOGLE_APPLICATION_CREDENTIALS=/conn/gcp
+  env_file:
+    - ./.env
+
+services:
+  # &x-services-common:
+  app:
+    container_name: app
+    build:
+      context: ./app
+      dockerfile: ../Dockerfile
+    command: tail -f /dev/null
+    volumes:
+      - ./app:/app
+      - ./conn/gcp:/conn/gcp
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/conn/gcp
+    env_file:
+      - ./.env
+
+  jupyter:
+    container_name: jupyter
+    build:
+      context: ./app
+      dockerfile: ../Dockerfile
+      target: jupyter
+    volumes:
+      - ./app:/app
+      - ./conn/gcp:/conn/gcp
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/conn/gcp
+    env_file:
+      - ./.env
+    ports:
+      - 8085:8085
