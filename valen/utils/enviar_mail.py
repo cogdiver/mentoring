@@ -21,12 +21,12 @@ def send_email(subject, message):
         smtp_port = 587  # TLS port for Gmail SMTP server
 
         # Email account credentials
-        gmail_user = "valentinaarenas2@gmail.com"
-        gmail_password = "oaoi qxfh kvcb eqof"
+        gmail_user = "user@gmail.com"
+        gmail_password = "xxxx xxxx xxxx xxxx"
 
         # List of recipient email addresses
         to_addresses = [
-            "valentinaarenas2@gmail.com"
+            "user@gmail.com"
         ]
 
         # Create a MIMEText object with HTML content
