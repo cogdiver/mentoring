@@ -1,0 +1,17 @@
+services:
+  app:
+    build: ./app
+    container_name: miguel_app
+    command: tail -f /dev/null
+    volumes:
+      - ./app:/app
+
+  jupyter:
+    build:
+      context: ./app
+      target: jupyter
+    container_name: miguel_jupyter
+    volumes:
+      - ./app:/app
+    ports:
+      - 8085:8080
