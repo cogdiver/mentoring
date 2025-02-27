@@ -1,0 +1,14 @@
+
+services:
+  pt-backend:
+    container_name: pt-backend
+    command: uvicorn main:app --host 0.0.0.0 --port 80 --reload
+    build:
+      context: app/
+      dockerfile: ../Dockerfile
+    ports:
+      - 8085:80
+    volumes:
+    - ./app:/app
+    env_file:
+      - .env
