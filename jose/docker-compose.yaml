@@ -12,3 +12,21 @@ services:
     - ./app:/app
     env_file:
       - .env
+
+  pt-postgres:
+    image: postgres:latest
+    container_name: pt-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: mydatabase
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d
+      - ./data:/pt-data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pg_data:
